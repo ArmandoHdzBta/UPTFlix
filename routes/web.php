@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+
+Route::get("/registrarse", [RegistroController::class, 'registro'])->name("registrarse");
+Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup");
