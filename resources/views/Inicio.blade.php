@@ -5,10 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    
-    
-
-
 </head>
 
 //para el fondo solo poner black
@@ -76,12 +72,14 @@
                 </div>
             </div>
             <div class="our-story-card animation-card watchOnDevice" data-uia-our-story="watchOnDevice" data-uia="our-story-card"><div class="animation-card-container"><div class="our-story-card-text"><h1 id="" class="our-story-card-title" data-uia="animation-card-title">Puedes observarlos en diferentes dipositivos</h1>
-                <h2 id="" class="our-story-card-subtitle" data-uia="our-story-card-subtitle">Dispositivos disponibles:tablet, laptop, y TV</h2>
+                <h2 id="" class="our-story-card-subtitle" 
+                data-uia="our-story-card-subtitle">Dispositivos disponibles:tablet, laptop, y TV</h2>
             </div>
             <div class="our-story-card-img-container">
                 <div class="our-story-card-animation-container"><img alt="" class="our-story-card-img" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/device-pile.png" data-uia="our-story-card-img">
                     <div class="our-story-card-animation">
-                        <div class="our-story-card-animation-text"></div></div>
+                        <div class="our-story-card-animation-text"></div>
+                    </div>
                     </div>
                 </div>
                 <div class="center-pixel" style="position:absolute">
@@ -89,7 +87,9 @@
             </div>
         </div>
 
-        <div class="our-story-card animation-card kidsValueProp flipped" data-uia-our-story="kidsValueProp" data-uia="our-story-card"><div class="animation-card-container"><div class="our-story-card-text">
+        <div class="our-story-card animation-card kidsValueProp flipped" data-uia-our-story="kidsValueProp" data-uia="our-story-card">
+            <div class="animation-card-container">
+                <div class="our-story-card-text">
             <h1 id="" class="our-story-card-title" data-uia="animation-card-title">Puedes crear perfiles para niños</h1>
             <h2 id="" class="our-story-card-subtitle" data-uia="our-story-card-subtitle">Seccion para niños totalmente segura.</h2>
         </div>
