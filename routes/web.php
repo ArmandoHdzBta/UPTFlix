@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\IniciarSesionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ Route::get('/', function () {
     return view('home');
 });
 
+
+Route::get("/iniciarSesion", [IniciarSesionController::class, 'iniciarsesion'])->name('iniciarsesion');
+Route::post("/iniciarSesion", [IniciarSesionController::class, 'signin'])->name('signin');
 
 Route::get("/registrarse", [RegistroController::class, 'registro'])->name("registrarse");
 Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup");
