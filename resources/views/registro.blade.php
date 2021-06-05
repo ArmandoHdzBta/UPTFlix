@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.layout')
 
 @section('css')
 	<style>
@@ -19,7 +19,7 @@
 	</style>
 @endsection
 
-@section("Registo")
+@section("UPTFlix | Registo")
 
 @section('content')
 	<div class="container">
