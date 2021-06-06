@@ -26,6 +26,6 @@ Route::post("/iniciarSesion", [IniciarSesionController::class, 'signin'])->name(
 Route::get("/registrarse", [RegistroController::class, 'registro'])->name("registrarse");
 Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup");
 
-//Inicio de sesion administrador
+//Inicio de sesion administrador--
 Route::get('/Uptflix/login/admin',[AdministradorController::class,'loginView'])->name('loginAdmin');
 Route::get('/loginAdmin',[AdministradorController::class,'loginAdmin'])->name('loginAdmin');

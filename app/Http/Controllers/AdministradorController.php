@@ -8,7 +8,6 @@ class AdministradorController extends Controller
     //vista login
     public function loginView()
     {
-        
         return view("administrador.loginAdministrador");
     }
 }
