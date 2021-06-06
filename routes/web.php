@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\IniciarSesionController;
+use App\Http\Controllers\AdministradorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,7 @@ Route::post("/iniciarSesion", [IniciarSesionController::class, 'signin'])->name(
 
 Route::get("/registrarse", [RegistroController::class, 'registro'])->name("registrarse");
 Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup");
+
+//Inicio de sesion administrador
+Route::get('/Uptflix/login/admin',[AdministradorController::class,'loginView'])->name('loginAdmin');
+Route::get('/loginAdmin',[AdministradorController::class,'loginAdmin'])->name('loginAdmin');
