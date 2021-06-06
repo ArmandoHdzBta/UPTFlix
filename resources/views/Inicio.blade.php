@@ -1,7 +1,3 @@
-@extends('layout.layout')
-
-{{-- TITLE --}}
-@section('Home')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,6 +117,3 @@
 
 </body>
 </html>
-@section('content')
-
-@endsection

@@ -19,7 +19,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-
 Route::get("/iniciarSesion", [IniciarSesionController::class, 'iniciarsesion'])->name('iniciarsesion');
 Route::post("/iniciarSesion", [IniciarSesionController::class, 'signin'])->name('signin');
 
