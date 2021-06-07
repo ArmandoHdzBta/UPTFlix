@@ -28,4 +28,7 @@ Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup
 
 //Inicio de sesion administrador--
 Route::get('/Uptflix/login/admin',[AdministradorController::class,'loginView'])->name('loginAdmin');
-Route::get('/loginAdmin',[AdministradorController::class,'loginAdmin'])->name('loginAdmin');
+Route::post('/loginAdmin',[AdministradorController::class,'verificarLogin'])->name('verificarLogin');
+//Registrarse admin
+Route::get('/Uptflix/registrarse/admin',[AdministradorController::class,'registrarseAdmin'])->name('registrarseAdmin');
+Route::post('/registrarseAdmin',[AdministradorController::class,'verificarRegistro'])->name('verificarRegistro');

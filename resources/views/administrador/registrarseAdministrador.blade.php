@@ -83,7 +83,18 @@
                 <input type="password" id="inputPassword" name="password" class="form-control" style="background-color:transparent" placeholder="Contraseña" >
                 <p id="contraseña" class="text-danger"> </p>
                 <br><br>
-              </div>
+             <div >
+                <label class"form-control bg-transparent border-orange">Correo electronico</label>
+                <input type="email" id="inputEmail" name="correo" class="form-control" style="background-color:transparent" placeholder="Correo Electronico"  >
+                <p id="email" class="text-danger"> </p>
+                </div>
+                <br>
+                <div >
+                <label class="label">Contraseña</label>
+                <input type="password" id="inputPassword" name="password" class="form-control" style="background-color:transparent" placeholder="Contraseña" >
+                <p id="contraseña" class="text-danger"> </p>
+                <br>
+             </div>
               <button class="btn-summit btn-success text-light" id="iniciarSesion" type="submit">Iniciar Sesion</button>
             </form>
         </div>
