@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\IniciarSesionController;
+
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AdministradorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +33,8 @@ Route::get("/registrarse", [RegistroController::class, 'registro'])->name("regis
 Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup");
 
 Route::get("/home", [InicioController::class, 'index'])->name('usuario.home');
+=======
+//Inicio de sesion administrador
+Route::get('/Uptflix/login/admin',[AdministradorController::class,'loginView'])->name('loginAdmin');
+Route::get('/loginAdmin',[AdministradorController::class,'loginAdmin'])->name('loginAdmin');
+
