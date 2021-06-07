@@ -33,7 +33,7 @@ Route::get("/registrarse", [RegistroController::class, 'registro'])->name("regis
 Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup");
 
 Route::get("/home", [InicioController::class, 'index'])->name('usuario.home');
-=======
+
 //Inicio de sesion administrador
 Route::get('/Uptflix/login/admin',[AdministradorController::class,'loginView'])->name('loginAdmin');
 Route::get('/loginAdmin',[AdministradorController::class,'loginAdmin'])->name('loginAdmin');
