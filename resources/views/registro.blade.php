@@ -19,7 +19,7 @@
 	</style>
 @endsection
 
-@section("UPTFlix | Registo")
+@section("title", "UPTFlix | Registo")
 
 @section('content')
 	<div class="container">
