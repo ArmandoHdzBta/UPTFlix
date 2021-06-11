@@ -1,12 +1,9 @@
 <?php
 
-use App\Http\Controllers\IniciarSesionController;
-
-use App\Http\Controllers\InicioController;
-use App\Http\Controllers\RegistroController;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\InicioController;
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -20,19 +17,23 @@ use App\Http\Controllers\AdministradorController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('home');
-});*/
 
 Route::view('/','home')->name('home');
 
-Route::get("/iniciarSesion", [IniciarSesionController::class, 'iniciarsesion'])->name('iniciarsesion');
-Route::post("/iniciarSesion", [IniciarSesionController::class, 'signin'])->name('signin');
+Route::get("/iniciarSesion", [UsuarioController::class, 'iniciarsesion'])->name('iniciarsesion');
+Route::post("/iniciarSesion", [UsuarioController::class, 'signin'])->name('signin');
 
-Route::get("/registrarse", [RegistroController::class, 'registro'])->name("registrarse");
-Route::post("/registrarse", [RegistroController::class, 'signup'])->name("signup");
+Route::get("/registrarse", [UsuarioController::class, 'registro'])->name("registrarse");
+Route::post("/registrarse", [UsuarioController::class, 'signup'])->name("signup");
 
-Route::get("/home", [InicioController::class, 'index'])->name('usuario.home');
+Route::get('/signout', [UsuarioController::class, 'signout'])->name('signout');
+
+//user verificated
+Route::prefix('/user')->middleware('verificarUsuario')->group(function (){
+    Route::get("/home", [InicioController::class, 'index'])->name('usuario.home');
+
+    Route::get('/ver-pelicula/{id}', [InicioController::class, 'verPelicula'])->name('user.watchMovie');
+});
 
 //Inicio de sesion administrador
 Route::get('/Uptflix/login/admin',[AdministradorController::class,'loginView'])->name('loginAdmin');

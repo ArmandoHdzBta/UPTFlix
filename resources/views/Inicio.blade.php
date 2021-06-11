@@ -20,13 +20,29 @@
     <!-- CONTAINER -->
     <div class="container mt-5">
         <div class="row" id="contenido">
+            @forelse ($peliculas as $pelicula)
+                <div class="col-md-4 col-sm-6 mb-2 d-flex justify-content-center">
+                    <div class="card border-card-orange" style="width: 18rem;">
+                        <img src="{{ Storage::url('cover/'.$pelicula->cover) }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">{{ $pelicula->titulo }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ $pelicula->time }}</h6>
+                            <a href="{{ route('user.watchMovie', ['id'=>$pelicula->idpelicula]) }}" class="btn btn btn-orange col-12 text-white">Ver Pelicula</a>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="alert alert-secondary text-center">
+                    Aún no hay peliculas para mostrar
+                </div>
+            @endforelse
             <div class="col-md-4 col-sm-6 mb-2 d-flex justify-content-center">
                 <div class="card border-card-orange" style="width: 18rem;">
                     <img src="{{ Storage::url('cover/coverP.png') }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-dark">UP: Una aventura de altura</h5>
                         <h6 class="card-subtitle mb-2 text-muted">1:30h</h6>
-                        <a href="" class="btn btn btn-orange col-12 text-white">Ver Pelicula</a>
+                        <a href="{{ route('user.watchMovie', ['id'=>1]) }}" class="btn btn btn-orange col-12 text-white">Ver Pelicula</a>
                     </div>
                 </div>
             </div>
