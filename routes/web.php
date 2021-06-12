@@ -35,7 +35,17 @@ Route::prefix('/user')->middleware('verificarUsuario')->group(function (){
     Route::get('/ver-pelicula/{id}', [InicioController::class, 'verPelicula'])->name('user.watchMovie');
 });
 
-//Inicio de sesion administrador
-Route::get('/Uptflix/login/admin',[AdministradorController::class,'loginView'])->name('loginAdmin');
-Route::get('/loginAdmin',[AdministradorController::class,'loginAdmin'])->name('loginAdmin');
+//Rutas
+//login Admin
+Route::get('/Uptflix/login/admin',[AdministradorController::class,'vistaLogin'])->name('loginAdminView');
+Route::post('/loginAdmin',[AdministradorController::class,'verificarLogin'])->name('loginAdmin');
+//signin Admin
+Route::get('/Uptflix/signin/admin',[AdministradorController::class,'vistaRegistrase'])->name('signinAdminView');
+Route::post('/signinAdmin',[AdministradorController::class,'verificarAdmin'])->name('signinAdmin');
+//cerrar sesion
+Route::get('/Uptflix/logout/admin',[AdministradorController::class,'logout'])->name('logoutAdmin');
+//Rutas administrador
+Route::prefix('/admin')->middleware('verificarAdministrador')->group(function(){
+    Route::get("/inicioAdmin",[AdministradorController::class,'vistaInicio'])->name('admin.inicio');
+});
 
