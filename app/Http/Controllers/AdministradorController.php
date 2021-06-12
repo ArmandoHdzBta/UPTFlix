@@ -39,7 +39,7 @@ class AdministradorController extends Controller
                 return redirect($url);
             }else{
                 //return json_encode(["estatus" => "success","mensaje" => "Sesion iniciada"]);
-                return redirect()->route('administrador.inicio');
+                return redirect()->route('admin.inicio');
                
             }
     }
@@ -111,8 +111,9 @@ class AdministradorController extends Controller
     {
         if(Session::has('admin'))
             Session::forget('admin');
+        //Retornar a vista login
+        return redirect()->route('loginAdminView');
 
-        return redirect()->route('administrador.loginAdministrador');
     }
 
     public function vistaInicio()

@@ -110,6 +110,7 @@
 
     $("#iniciarSesion").click( function (){
         //Verifican que tengan datos los campos
+        //
         if($("#inputEmail").val() == ""){
           document.getElementById("email").innerHTML = "Ingresa correo correo";
           $("#inputEmail").focus(); 
