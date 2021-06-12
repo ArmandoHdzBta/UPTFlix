@@ -106,8 +106,6 @@
 <script>
   $(document).ready(function (){
     
-     
-
     $("#iniciarSesion").click( function (){
         //Verifican que tengan datos los campos
         //

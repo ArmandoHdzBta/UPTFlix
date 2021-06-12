@@ -78,7 +78,6 @@ class AdministradorController extends Controller
         if(strlen($datos->password) > 32){
             return json_encode(["estatus"=>"password", "mensaje"=>"Contraseña maximo de 9 caracteres"]);
          }
-
         //Estanciar valores
         $nombre = $datos->nombre;
         $apellidoP = $datos->apellidoP;
