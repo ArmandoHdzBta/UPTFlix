@@ -46,6 +46,7 @@ Route::post('/signinAdmin',[AdministradorController::class,'verificarAdmin'])->n
 Route::get('/Uptflix/logout/admin',[AdministradorController::class,'logout'])->name('logoutAdmin');
 //Rutas administrador
 Route::prefix('/admin')->middleware('verificarAdministrador')->group(function(){
+    
     Route::get("/inicioAdmin",[AdministradorController::class,'vistaInicio'])->name('admin.inicio');
 });
 

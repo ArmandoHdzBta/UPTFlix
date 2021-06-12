@@ -110,8 +110,9 @@ class AdministradorController extends Controller
     {
         if(Session::has('admin'))
             Session::forget('admin');
-
+        //Retornar a vista login
         return redirect()->route('loginAdminView');
+
     }
 
     public function vistaInicio()

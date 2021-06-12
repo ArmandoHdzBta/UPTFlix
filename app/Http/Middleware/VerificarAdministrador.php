@@ -19,6 +19,7 @@ class VerificarAdministrador
     {
         if(!Session::has('admin'))
             return redirect()->route("loginAdminView",["r"=> encrypt($request->getRequestUri())]);
+      
         return $next($request);
     }
 }
