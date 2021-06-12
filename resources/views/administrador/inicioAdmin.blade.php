@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Inicio Admin </h1>
+    <h1> Inicio Admin xd</h1>
 </body>
 </html>

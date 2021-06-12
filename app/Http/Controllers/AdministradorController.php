@@ -39,7 +39,7 @@ class AdministradorController extends Controller
                 return redirect($url);
             }else{
                 //return json_encode(["estatus" => "success","mensaje" => "Sesion iniciada"]);
-                return redirect()->route('administrador.inicio');
+                return redirect()->route('admin.inicio');
                
             }
     }
@@ -78,7 +78,6 @@ class AdministradorController extends Controller
         if(strlen($datos->password) > 32){
             return json_encode(["estatus"=>"password", "mensaje"=>"Contraseña maximo de 9 caracteres"]);
          }
-
         //Estanciar valores
         $nombre = $datos->nombre;
         $apellidoP = $datos->apellidoP;
@@ -112,7 +111,7 @@ class AdministradorController extends Controller
         if(Session::has('admin'))
             Session::forget('admin');
 
-        return redirect()->route('administrador.loginAdministrador');
+        return redirect()->route('loginAdminView');
     }
 
     public function vistaInicio()

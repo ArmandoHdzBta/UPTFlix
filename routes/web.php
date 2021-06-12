@@ -36,7 +36,7 @@ Route::prefix('/user')->middleware('verificarUsuario')->group(function (){
 });
 
 //Rutas
-//login Admin
+//login Admin -
 Route::get('/Uptflix/login/admin',[AdministradorController::class,'vistaLogin'])->name('loginAdminView');
 Route::post('/loginAdmin',[AdministradorController::class,'verificarLogin'])->name('loginAdmin');
 //signin Admin
