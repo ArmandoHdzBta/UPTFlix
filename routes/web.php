@@ -47,6 +47,7 @@ Route::post('/signinAdmin',[AdministradorController::class,'verificarAdmin'])->n
 Route::get('/Uptflix/logout/admin',[AdministradorController::class,'logout'])->name('logoutAdmin');
 //Rutas administrador
 Route::prefix('/admin')->middleware('verificarAdministrador')->group(function(){
+<<<<<<< HEAD
     //Datos de administrador
     Route::get("/Perfil",[AdministradorController::class,'perfilView'])->name('admin.Perfil');//Agregar foto de perfil
     Route::get('/Uptflix/signin/admin/fotoPerfil',[AdministradorController::class,'fotoAdminView'])->name('fotoAdminView');
@@ -57,5 +58,9 @@ Route::prefix('/admin')->middleware('verificarAdministrador')->group(function(){
     Route::get("/peliculas",[PeliculaController::class,'peliculasViewAdmin'])->name('admin.peliculas');
     Route::get("/peliculas/list",[PeliculaController::class,'peliculasList'])->name('admin.peliculas.list');
     
+=======
+    
+    Route::get("/inicioAdmin",[AdministradorController::class,'vistaInicio'])->name('admin.inicio');
+>>>>>>> aaad5062190d5e1f1684f75b26e076f67619527a
 });
 

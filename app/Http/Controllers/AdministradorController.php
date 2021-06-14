@@ -99,8 +99,9 @@ class AdministradorController extends Controller
     {
         if(Session::has('admin'))
             Session::forget('admin');
-
+        //Retornar a vista login
         return redirect()->route('loginAdminView');
+
     }
     //Funcion para subir fotos
     public function fotoAdminView()

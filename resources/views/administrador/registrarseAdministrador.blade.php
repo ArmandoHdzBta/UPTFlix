@@ -97,6 +97,7 @@
                     $("#inputEmail").focus(); 
                   }
                   //Avisa acerca de errores en la contraseña
+                  
                   if(data.estatus == "password"){
                     document.getElementById("contraseña").innerHTML = data.mensaje;
                     $("#inputPassword").focus(); 
