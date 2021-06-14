@@ -55,7 +55,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{route('admin.peliculas')}}">Peliculas</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Categorias</a>
+                                    <a class="nav-link" href="{{route('admin.categoria.view')}}">Categorias</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading text-danger">Otros</div>
