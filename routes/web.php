@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\PeliculaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,15 @@ Route::post('/signinAdmin',[AdministradorController::class,'verificarAdmin'])->n
 Route::get('/Uptflix/logout/admin',[AdministradorController::class,'logout'])->name('logoutAdmin');
 //Rutas administrador
 Route::prefix('/admin')->middleware('verificarAdministrador')->group(function(){
-    Route::get("/inicioAdmin",[AdministradorController::class,'vistaInicio'])->name('admin.inicio');
+    //Datos de administrador
+    Route::get("/Perfil",[AdministradorController::class,'perfilView'])->name('admin.Perfil');//Agregar foto de perfil
+    Route::get('/Uptflix/signin/admin/fotoPerfil',[AdministradorController::class,'fotoAdminView'])->name('fotoAdminView');
+    Route::post('/signinAdmin/foto',[AdministradorController::class,'uploadFoto'])->name('signinAdminFoto');
+    
+    //Vistas
+    Route::get("/inicio",[AdministradorController::class,'vistaInicio'])->name('admin.inicio');
+    Route::get("/peliculas",[PeliculaController::class,'peliculasViewAdmin'])->name('admin.peliculas');
+    Route::get("/peliculas/list",[PeliculaController::class,'peliculasList'])->name('admin.peliculas.list');
+    
 });
 

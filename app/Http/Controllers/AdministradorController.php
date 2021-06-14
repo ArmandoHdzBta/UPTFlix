@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrador;
+use App\Models\Pelicula;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -57,21 +58,13 @@ class AdministradorController extends Controller
         if(!$datos->nombre || !$datos->apellidoP || !$datos->apellidoM || !$datos->correo || !$datos->password || !$datos->password2)
             return json_encode(["estatus"=>"warning", "mensaje"=>"Faltan datos, revisa los campos"]);
 
-        //Se verifica que si sea un correo el correo ingresado
-
-        //validation email
-        $datos->validate([
-            'correo' => "required|email"
-        ]);
-
-
         //Esta funcion se encarga de revisar si el correo no esta registrado
         $usuario = Administrador::where('correo',$datos->correo)->first();
         if($usuario)
             return json_encode(["estatus"=>"email", "mensaje"=>"El correo ya existe elige otro"]);
-
+       
         //Verificar contraseña
-        //Esta funcion se encarga de verificar que la contraseña tenga mas de 8 caracyeres y menos de 32
+        //Esta funcion se encarga de verificar que la contraseña tenga mas de 8 caracteres y menos de 32
         if(strlen($datos->password) < 8){
             return json_encode(["estatus"=>"password", "mensaje"=>"Contraseña minimo de 8 caracteres"]);
           }
@@ -86,10 +79,6 @@ class AdministradorController extends Controller
         $password1 = $datos->password;
         $password2 = $datos->password2;
 
-        //Verificar imagen
-        
-        //Verificar imagen
-
         //Comprobar si las contraseñas son iguales
         if($password1 != $password2)
             return json_encode(["estatus"=>"password", "mensaje"=>"Las contraseñas no son iguales"]);
@@ -100,12 +89,12 @@ class AdministradorController extends Controller
         $administrador->apellido_pat = $apellidoP;
         $administrador->apellido_mat = $apellidoM;
         $administrador->correo = $correo;
-        $administrador->avatar = "";
+        $administrador->avatar = "img/FotosPerfil/default.png";
         $administrador->password = bcrypt($password1);
         $administrador->save();
-        return json_encode(["estatus"=>"success", "mensaje"=>"Se ha registrado como Admin"]);
+        return json_encode(["estatus"=>"success", "mensaje"=>"Cuenta creada haga clic para iniciar sesion"]);
     }
-
+    //Funcion para cerrar sesion
     public function logout()
     {
         if(Session::has('admin'))
@@ -113,9 +102,25 @@ class AdministradorController extends Controller
 
         return redirect()->route('loginAdminView');
     }
-
-    public function vistaInicio()
+    //Funcion para subir fotos
+    public function fotoAdminView()
     {
         return view("administrador.inicioAdmin");
+    }
+    //
+    public function uploadFoto(Request $datos)
+    {
+        
+    }
+    //Vista de inicio del administrador
+    public function vistaInicio()
+    {  
+        $peliculas = Pelicula::orderBy('created_at', 'DESC')->get();
+        return view("administrador.inicioAdmin",  ['peliculas'=>$peliculas]);
+    }
+    //Datos administrador
+    public function perfilView()
+    {  
+        return view("administrador.perfilAdministrador");
     }
 }

@@ -8,59 +8,7 @@
     <title>Inicio de sesion</title>
     <!------------------------------>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-      *{
-        padding: 0px;
-        margin: 0px;
-      }
-      body{
-        background: black;
-      }
-      .btn-summit{
-        background: orangered;
-        border: none;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin-left: 30%;
-        width: 33.33%;
-      }
-      .title-1{
-        width: auto;
-        font-size: 32px;
-        border-top-color: orangered;
-        border-right-color: black;
-        border-bottom-color:orangered;
-        border-left-color: black;
-      }
-      img{
-        width: 180px; height: 180px;
-        display: block;
-        margin: auto;
-        border-radius: 12px;
-      }
-      input[type="text"],
-	  	input[type="email"],
-	  	input[type="password"]{
-			background: transparent;
-			color: #fff;
-			border: none;
-			border-bottom: 2.5px solid rgb(255,69,0);
-		  }
-      .fondo{
-        background-color: black;
-      }
-      label{
-        color: white;
-      }
-      .input:focus{
-        border-color: orangered;
-        outline: 0 none;
-      }
-		
-  </style>
+    <link href="/../css/admin.css" rel="stylesheet" />
     <!------------------------------>
 </head>
 <body>
