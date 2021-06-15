@@ -32,7 +32,7 @@
 </head>
 <body class="bg-black text-white">
     <!-- NAV BAR -->
-	<nav class="navbar navbar-expand-sm navbar-dark bg-transparent position-absolute ml-0 col-12">
+	<nav class="navbar navbar-expand-sm navbar-dark bg-transparent ml-0 col-12">
 		<div class="container-fluid">
 			<a class="navbar-brand text-orange" href="{{ route('home') }}"><h2>UPTFLIX</h2></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,8 @@
 						</li>
 						<li class="nav-item dropdown">
           					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Configuración</a>
-				          	<ul class="dropdown-menu bg-transparent" aria-labelledby="navbarDropdown">
-				            	<li><a class="dropdown-item" href="#">Perfil</a></li>
+				          	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+				            	<li><a class="dropdown-item" href="{{ route('user.profile') }}">Perfil</a></li>
 				            	<li><a class="dropdown-item" href="#">Mis Peliculas</a></li>
 				            	<li><hr class="dropdown-divider"></li>
 				            	<li><a class="dropdown-item" href="#">Something else here</a></li>

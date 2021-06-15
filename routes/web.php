@@ -32,6 +32,11 @@ Route::get('/signout', [UsuarioController::class, 'signout'])->name('signout');
 //user verificated
 Route::prefix('/user')->middleware('verificarUsuario')->group(function (){
     Route::get("/home", [InicioController::class, 'index'])->name('usuario.home');
+    //profile routes
+    Route::get('/perfil', [UsuarioController::class, 'profile'])->name('user.profile');
+    Route::get('/mis-tarjetas', [UsuarioController::class, 'profile'])->name('user.myCards');
+    Route::get('/mis-perfiles', [UsuarioController::class, 'profile'])->name('user.myProfiles');
+    Route::get('/mis-peliculas', [UsuarioController::class, 'profile'])->name('user.myMovies');
 
     Route::get('/ver-pelicula/{id}', [InicioController::class, 'verPelicula'])->name('user.watchMovie');
 });

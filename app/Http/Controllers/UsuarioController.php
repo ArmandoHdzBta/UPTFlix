@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\UsuarioPelicula;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -49,7 +50,7 @@ class UsuarioController extends Controller
         $usuario->apellido_pat = $datos->app;
         $usuario->apellido_mat = $datos->apm;
         $usuario->direccion = $datos->address;
-        $usuario->avatar = "default.png";
+        $usuario->avatar = "default.jpg";
         $usuario->correo = $datos->email;
         $usuario->password = bcrypt($pass1);
         $usuarioOk = $usuario->save();
@@ -81,6 +82,16 @@ class UsuarioController extends Controller
         }else{
             return redirect()->route('usuario.home');
         }
+    }
+
+    public function profile()
+    {
+        //obtener los datos correspondites [tarjetas, perfiles, peliculas vistas] y mandarlas
+        //Usuer's movies
+        $usuarioPeliculas = UsuarioPelicula::where('idusuario', session('usuario')->idusuario)
+                            ->orderBy('updated_at', 'ASC')
+                            ->get();
+        return view('user.config-usuario', ['usuarioPeliculas'=>$usuarioPeliculas]);
     }
 
     public function signout()
