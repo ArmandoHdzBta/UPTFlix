@@ -34,7 +34,11 @@ Route::prefix('/user')->middleware('verificarUsuario')->group(function (){
     Route::get("/home", [InicioController::class, 'index'])->name('usuario.home');
     //profile routes
     Route::get('/perfil', [UsuarioController::class, 'profile'])->name('user.profile');
+    //edit or add card
     Route::get('/mis-tarjetas', [UsuarioController::class, 'profile'])->name('user.myCards');
+    Route::get('/find/mi-tarjeta/{idtarjeta?}', [UsuarioController::class, 'findCard'])->name('user.myFindCard');
+    Route::post('/mis-tarjetas', [UsuarioController::class, 'editCard'])->name('user.myCardEdit');
+    //
     Route::get('/mis-perfiles', [UsuarioController::class, 'profile'])->name('user.myProfiles');
     Route::get('/mis-peliculas', [UsuarioController::class, 'profile'])->name('user.myMovies');
 
