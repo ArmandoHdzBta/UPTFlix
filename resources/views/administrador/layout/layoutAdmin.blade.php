@@ -26,7 +26,7 @@
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
               <p class="text-white">Administrador: {{session('admin')->nombre}} {{session('admin')->apellido_pat}} {{session('admin')->apellido_mat}}</p>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src=/{{session('admin')->avatar}}
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src={{asset(Session('admin')->avatar)}}
                         width="25"
                         height="25"></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -48,14 +48,17 @@
                             </a>
                             <div class="sb-sidenav-menu-heading text-danger">Opciones</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-film"></i></div>
                                 Peliculas
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{route('admin.peliculas')}}">Peliculas</a>
-                                    <a class="nav-link" href="{{route('admin.categoria.view')}}">Categorias</a>
+                                    <a class="nav-link" href="{{route('admin.peliculas')}}"><i class="fas fa-film"></i> Peliculas</a>
+                                     
+                                </nav>
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{route('agregar.pelicula.view')}}"><i class="fas fa-plus-square"></i>Agregar pelicula</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading text-danger">Otros</div>
@@ -63,15 +66,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Perfil
                             </a>
-                            <a class="nav-link" href="{{route('admin.peliculas.list')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Lsitas de peliculas
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small text-warning">Conectado: {{session('admin')->nombre}}</div>
-                        <p class="text-light"><small>{{session('admin')->correo}}</small><p>
+                        
                         <p class="text-light"><small>Sistema de Administrador UPTFLIX</small><p>
                     </div>
                 </nav>
@@ -82,9 +81,19 @@
 
                         @yield('contenido')
                 </main>
+                <footer class="main-footer">
+                    <strong>Copyright &copy; 2014-2021  UPTFLIX </strong>
+                   
+                    <div class="float-right d-none d-sm-inline-block">
+                      <b>Version</b> 3.1.0
+                    </div>
+                </footer>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="/../js/scripts.js"></script>
         @yield('js')
     </body>

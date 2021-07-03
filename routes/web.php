@@ -44,7 +44,7 @@ Route::prefix('/user')->middleware('verificarUsuario')->group(function (){
 //Rutas
 //login Admin -
 Route::get('/Uptflix/login/admin',[AdministradorController::class,'vistaLogin'])->name('loginAdminView');
-Route::post('/loginAdmin',[AdministradorController::class,'verificarLogin'])->name('loginAdmin');
+Route::post('/Uptflix/login/admin',[AdministradorController::class,'verificarLogin'])->name('loginAdmin');
 //signin Admin
 Route::get('/Uptflix/signin/admin',[AdministradorController::class,'vistaRegistrase'])->name('signinAdminView');
 Route::post('/signinAdmin',[AdministradorController::class,'verificarAdmin'])->name('signinAdmin');
@@ -53,16 +53,16 @@ Route::get('/Uptflix/logout/admin',[AdministradorController::class,'logout'])->n
 //Rutas administrador
 Route::prefix('/admin')->middleware('verificarAdministrador')->group(function(){
     //Datos de administrador
-    Route::get("/Perfil",[AdministradorController::class,'perfilView'])->name('admin.Perfil');
-    //Agregar foto de perfil
-    Route::get('/Uptflix/signin/admin/fotoPerfil',[AdministradorController::class,'fotoAdminView'])->name('fotoAdminView');
-    Route::post('/signinAdmin/foto',[AdministradorController::class,'uploadFoto'])->name('signinAdminFoto');
-    
+    Route::get("/perfil",[AdministradorController::class,'perfilView'])->name('admin.Perfil'); 
+    Route::get("/perfil/editar",[AdministradorController::class,'editarView'])->name('perfil.editar.view'); 
+    Route::post("/perfil/editar",[AdministradorController::class,'editarForm'])->name('perfil.editar.form'); 
     //Vistas
     Route::get("/inicio",[AdministradorController::class,'vistaInicio'])->name('admin.inicio');
     Route::get("/peliculas",[PeliculaController::class,'peliculasViewAdmin'])->name('admin.peliculas');
-    Route::get("/peliculas/list",[PeliculaController::class,'peliculasList'])->name('admin.peliculas.list');
-    Route::get("/peliculas/categorias",[PeliculaController::class,'categoriasView'])->name('admin.categoria.view');
-    Route::get("/peliculas/categorias/?",[PeliculaController::class,'categoriasPelicula'])->name('admin.categoria.pelicula');
+    Route::get("/peliculas/agregar",[PeliculaController::class,'agregarPeliculaView'])->name('agregar.pelicula.view');
+    Route::post("/peliculas/agregar",[PeliculaController::class,'agregarPelicula'])->name('agregar.pelicula.form');
+    Route::get("/peliculas/eliminar/{id?}",[PeliculaController::class,'eliminarPelicula'])->name('eliminar.pelicula');
+    Route::get("/peliculas/editar/{id?}",[PeliculaController::class,'editarPeliculaView'])->name('editar.pelicula.view');
+    Route::post("/peliculas/editar/{id?}",[PeliculaController::class,'editarPelicula'])->name('editar.pelicula.form');
 });
 

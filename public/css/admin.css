@@ -8,22 +8,13 @@
   .btn-summit{
     background: orangered;
     border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 30%;
-    width: 33.33%;
+    max-width: auto;;
   }
-  .title-1{
-    width: auto;
-    font-size: 32px;
-    border-top-color: black;
-    border-right-color: black;
-    border-bottom-color:black;
-    border-left-color: black;
+  .btn-summit:hover {
+    background-color: #1a7611;
+    transform: translateY(-3px);
   }
+
   img{
     width: 180px; height: 180px;
     display: block;
@@ -44,8 +35,16 @@
   }
   label{
     color: white;
+    text-align: 2;
+    border-left:  2.5px solid rgb(255,69,0);
+    padding-left: 3%;
   }
   .input:focus{
     border-color: orangered;
     outline: 0 none;
+  }
+
+  small{
+    border-left: rgb(151, 151, 151);
+    size: 15px;
   }

@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Administrador;
 use App\Models\Pelicula;
+use Dotenv\Exception\ValidationException;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Validation\ValidationException as ValidationValidationException;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Storage;
 
 class AdministradorController extends Controller
 {
@@ -18,81 +22,120 @@ class AdministradorController extends Controller
         return view("administrador.loginAdministrador");
     }
     //Verificar login
-    public function verificarLogin(Request $datos)
+    public function verificarLogin(Request $request)
     {
-        /*if(isset($datos))
-            return json_encode(["estatus" => "pruebas","mensaje" => "Si pasan"]);*/
-        $administrador = Administrador::where("correo",$datos->correo)->first();
-
+        //Se validan que se recivan datos
+        $request->validate([
+            'correo'=>'required|email',
+            'password'=>'required|min:6|max:32'
+        ]);
+        //Se verifica si existe alguna cuenta con este correo
+        $administrador = Administrador::where("correo",$request->correo)->first();
         if(!$administrador)
-            //return json_encode(["estatus" => "correo","mensaje" => "Correo no encotrado"]);
-            return view("administrador.loginAdministrador",["estatus"=> "error", "mensaje"=> "¡El correo no esta registrado!"]);
-
-        if(!Hash::check($datos->password,$administrador->password))
-            //return json_encode(["estatus" => "password","mensaje" => "Contraseña incorrecta"]);
-            return view("administrador.loginAdministrador",["estatus"=> "error", "mensaje"=> "Contraseña incorrecta!"]);
-
+            throw ValidationValidationException::withMessages([
+            'correo' => __('auth.fallo')
+        ]);
+        //Se comprueba que la contraseña coincida con la del correo
+        if(!Hash::check( $request->password,$administrador->password))
+            throw ValidationValidationException::withMessages([
+                 'password' => __('auth.password')
+            ]);
+            
+            //Se creea la sesion
             Session::put('admin',$administrador); 
             
-
-            if(isset($datos->url)){
-                $url = decrypt($datos->url);
+            //Esta funcion redirecciona a la siguiente vista
+            if(isset($request->url)){
+                $url = decrypt($request->url);
                 return redirect($url);
             }else{
-                //return json_encode(["estatus" => "success","mensaje" => "Sesion iniciada"]);
                 return redirect()->route('admin.inicio');
-               
             }
     }
 
     //Signin admin- Vista registrarse administrador
-    public function vistaRegistrase()
+    public function editarView()
     {
-        return view("administrador.registrarseAdministrador");
+        return view("administrador.editarPerfil");
     }
     //Verificar Signin
-    public function verificarAdmin(Request $datos)
+    public function editarForm(Request $request)
     {
+        
+        $request->validate([
+            'nombre' => 'max:16',
+            'apellidoP' => 'max:16',
+            'apellidoM' => 'max:16',
+            'correo' => 'email|max:32',
+            'password' => 'max:32',
+            'avatar' => 'image|mimes:jpeg,png|max:4096',
+            'password1' => 'required|max:32',
+            'password2' => 'required|max:32'
+        ]);
 
-        //Esta funcion informa que faltan datos por llenar
-        if(!$datos->nombre || !$datos->apellidoP || !$datos->apellidoM || !$datos->correo || !$datos->password || !$datos->password2)
-            return json_encode(["estatus"=>"warning", "mensaje"=>"Faltan datos, revisa los campos"]);
-
+    
         //Esta funcion se encarga de revisar si el correo no esta registrado
-        $usuario = Administrador::where('correo',$datos->correo)->first();
-        if($usuario)
-            return json_encode(["estatus"=>"email", "mensaje"=>"El correo ya existe elige otro"]);
+        if($request->correo != session('admin')->correo){
+            $usuario = Administrador::where('correo',$request->correo)->first();
+            if($usuario)
+                throw ValidationValidationException::withMessages([
+                     'correo' => __('auth.email')
+                ]);
+        }
        
-        //Verificar contraseña
-        //Esta funcion se encarga de verificar que la contraseña tenga mas de 8 caracteres y menos de 32
-        if(strlen($datos->password) < 8){
-            return json_encode(["estatus"=>"password", "mensaje"=>"Contraseña minimo de 8 caracteres"]);
-          }
-        if(strlen($datos->password) > 32){
-            return json_encode(["estatus"=>"password", "mensaje"=>"Contraseña maximo de 9 caracteres"]);
-         }
-        //Estanciar valores
-        $nombre = $datos->nombre;
-        $apellidoP = $datos->apellidoP;
-        $apellidoM = $datos->apellidoM;
-        $correo = $datos->correo;
-        $password1 = $datos->password;
-        $password2 = $datos->password2;
-
         //Comprobar si las contraseñas son iguales
-        if($password1 != $password2)
-            return json_encode(["estatus"=>"password", "mensaje"=>"Las contraseñas no son iguales"]);
-
+        if($request->password1 != $request->password2)
+            throw ValidationValidationException::withMessages([
+                'password1' => __('auth.contrasena')
+            ]);
+            
+        //Se comprueba que la contraseña coincida con la del correo en la base de datos
+        $datosP = Administrador::where('correo',session('admin')->correo)->first();
+       
+        if(!Hash::check($request->password1,$datosP->password))
+            throw ValidationValidationException::withMessages([
+                 'password1' => __('auth.error01')
+            ]);
+        
+        //Validar imagen
+        //Imagen
+        $url = "";
+        if($request->avatar)
+        {
+            $imagen = $request->file('avatar')->store('public/imagenes/perfil');
+            $url = Storage::url($imagen);
+        }else{
+            $url = $request->cover;
+        }
         //
-        $administrador = new Administrador();
-        $administrador->nombre = $nombre;
-        $administrador->apellido_pat = $apellidoP;
-        $administrador->apellido_mat = $apellidoM;
-        $administrador->correo = $correo;
-        $administrador->avatar = "img/FotosPerfil/default.png";
-        $administrador->password = bcrypt($password1);
-        $administrador->save();
-        return json_encode(["estatus"=>"success", "mensaje"=>"Cuenta creada haga clic para iniciar sesion"]);
+        //Password
+        $pass = "";
+        if($request->password){
+            $pass = bcrypt($request->password); 
+        }else{
+            $pass =  session('admin')->password;
+        }
+        //
+        $datos = Administrador::find( session('admin')->idadministrador);
+        $datos->nombre = $request->nombre;
+        $datos->apellido_pat = $request->apellidoP;
+        $datos->apellido_mat = $request->apellidoM;
+        $datos->correo = $request->correo;
+        $datos->avatar = $url;
+        $datos->password =$pass;
+        $datos->save();
+        //Actualizar datos de la sesion
+        session('admin')->nombre = $request->nombre;
+        session('admin')->apellido_pat = $request->apellidoP;
+        session('admin')->apellido_mat = $request->apellidoM;
+        session('admin')->correo = $request->correo;
+        session('admin')->avatar = $url;
+        session('admin')->password = $pass;
+        $datos = Administrador::find( session('admin')->idadministrador);
+
+        //return
+        return redirect()->route('admin.Perfil');
+        
     }
     //Funcion para cerrar sesion
     public function logout()
@@ -103,16 +146,7 @@ class AdministradorController extends Controller
         return redirect()->route('loginAdminView');
 
     }
-    //Funcion para subir fotos
-    public function fotoAdminView()
-    {
-        return view("administrador.inicioAdmin");
-    }
-    //
-    public function uploadFoto(Request $datos)
-    {
-        
-    }
+
     //Vista de inicio del administrador
     public function vistaInicio()
     {  
