@@ -26,15 +26,15 @@
 @section('content')
 	<div class="container mt-5">
 		<div class="row">
-			<div class="col-lg-5">
+			<div class="col-lg-5 col-md-12">
 				@include('user.partials.sub-menu')
 			</div>
-			<div class="col-lg-7">
+			<div class="col-lg-7 col-md-12">
 				@if (request()->routeIs('user.profile'))
 					@include('user.views.profile')
 				@elseif(request()->routeIs('user.myCards'))
 					{{-- mandar las variables a la vista  --}}
-					@include('user.views.mis-tarjetas')
+					@include('user.views.mis-tarjetas', ['usuarioTarjetas'=>$usuarioTarjetas, 'tipoTarjetas'=>$tipoTarjetas])
 				@elseif(request()->routeIs('user.myProfiles'))
 					@include('user.views.mis-perfiles')
 				@elseif(request()->routeIs('user.myMovies'))
